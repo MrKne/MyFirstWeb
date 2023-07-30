@@ -77,6 +77,7 @@ public class AdminAdvertPostControler : Controller
     }
 
 
+    [HttpGet]
 
         public async Task<IActionResult> List()
         {
@@ -84,6 +85,42 @@ public class AdminAdvertPostControler : Controller
 
            var advertPosts = await advertPostRepository.GetAllAsync();
             return View(advertPosts);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            // Retrieve the result from the repository
+           var advertPost = await advertPostRepository.GetAsync(id);
+
+            //map the domain model into view into the view model
+            var tagsDomainModel = await tagRepository.GetAllAsync();
+
+            if (advertPost != null)
+            { 
+            var model = new EditAdvertPostRequest
+             {
+                Id = advertPost.Id,
+                Heading = advertPost.Heading,
+                PageTitle = advertPost.PageTitle,
+                Content = advertPost.Content,
+                Author = advertPost.Author,
+                FeaturedImageUrl = advertPost.FeaturedImageUrl,
+                UrlHandle = advertPost.UrlHandle,
+                ShortDescription = advertPost.ShortDescription,
+                PublishedDate = advertPost.PublishedDate,
+                Visible = advertPost.Visible,
+                Tags = tagsDomainModel.Select(x => new SelectListItem
+                {
+                    Text = x.Name, Value = x.Id.ToString(),
+                }),
+                SelectedTags = advertPost.Tags.Select(x => x.Id.ToString()).ToArray()
+             };
+
+            return View(model);
+            }
+            //pass data to view
+           return View(null);
         }
 
     }

@@ -1,6 +1,8 @@
-﻿namespace MyFirst.Web.Models.Domain
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace MyFirst.Web.Models.ViewModels
 {
-    public class AdvertPost
+    public class EditAdvertPostRequest
     {
         public Guid Id { get; set; }
         public string Heading { get; set; }
@@ -13,8 +15,12 @@
         public string Author { get; set; }
         public bool Visible { get; set; }
 
-        // Navigation property
-        public ICollection <Tag> Tags { get; set; }
+        //Display tags
 
+        public IEnumerable<SelectListItem> Tags { get; set; }
+        // Collect Tag
+        public string SelectedTag { get; set; }
+
+        public string[] SelectedTags { get; set; } = Array.Empty<string>();
     }
 }

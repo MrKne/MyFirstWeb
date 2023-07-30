@@ -13,8 +13,9 @@
         <thead>
             <tr> 
                 <td> Id </td> 
-
-            <td> Heading</td>
+                <td> Heading</td>
+                <td> Tags </td>
+                 <td> </td>
         </tr>
         </thead>
         <tbody> 
@@ -28,9 +29,20 @@
                             @foreach(var tag in advertPost.Tags)
                             {
                                 <span class="badge bg-secondary me-1"> @tag.Name</span>
+
+                            
                             }
                         </div>
                     </td>
+                   <td> 
+                                <a asp-area="" 
+                                 asp-controller="AdminAdvertPostControler"
+                                 asp-action="Edit"
+                                 asp-route-id="@advertPost.Id"> Edit
+                                </a>
+
+                   </td>
+
                 </tr>
             }
         </tbody>

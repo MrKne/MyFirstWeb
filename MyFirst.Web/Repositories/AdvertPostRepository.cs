@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyFirst.Web.Data;
 using MyFirst.Web.Models.Domain;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MyFirst.Web.Repositories
 {
@@ -30,9 +31,9 @@ namespace MyFirst.Web.Repositories
            
         }
 
-        public Task<AdvertPost?> GetAsync(Guid id)
+        public async Task<AdvertPost?> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await myFirstWebDbContext.AdvertPosts.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task<AdvertPost?> UpdateAsync(AdvertPost advertPost)
