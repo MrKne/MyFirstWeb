@@ -1,0 +1,39 @@
+﻿@model List<MyFirst.Web.Models.Domain.AdvertPost>
+@{
+}
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1> Show All Advert Posts - Admin Funcionality </h1>
+    </div>
+</div>
+
+
+<div class="container py-5">
+    <table class="table">
+        <thead>
+            <tr> 
+                <td> Id </td> 
+
+            <td> Heading</td>
+        </tr>
+        </thead>
+        <tbody> 
+            @foreach(var advertPost in Model)
+            {
+                <tr> 
+                    <td>@advertPost.Id </td>
+                    <td>@advertPost.Heading </td>
+                    <td>
+                        <div class="d-flex">
+                            @foreach(var tag in advertPost.Tags)
+                            {
+                                <span class="badge bg-secondary me-1"> @tag.Name</span>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
