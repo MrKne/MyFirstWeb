@@ -123,5 +123,56 @@ public class AdminAdvertPostControler : Controller
            return View(null);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditAdvertPostRequest editAdvertPostRequest)
+        {
+            // map view model back to domain model
+            var advertPostDomainModel = new AdvertPost
+            {
+                Id = editAdvertPostRequest.Id,
+                Heading = editAdvertPostRequest.Heading,
+                PageTitle = editAdvertPostRequest.PageTitle,
+                Content = editAdvertPostRequest.Content,
+                Author = editAdvertPostRequest.Author,
+                ShortDescription = editAdvertPostRequest.ShortDescription,
+                FeaturedImageUrl = editAdvertPostRequest.FeaturedImageUrl,
+                PublishedDate = editAdvertPostRequest.PublishedDate,
+                UrlHandle = editAdvertPostRequest.UrlHandle,
+                Visible = editAdvertPostRequest.Visible
+            };
+
+            // Map tags into domain model
+
+            var selectedTags = new List<Tag>();
+            foreach (var selectedTag in editAdvertPostRequest.SelectedTags)
+            {
+                if (Guid.TryParse(selectedTag, out var tag))
+                {
+                    var foundTag = await tagRepository.GetAsync(tag);
+
+                    if (foundTag != null)
+                    {
+                        selectedTags.Add(foundTag);
+
+                    }
+                    
+                }
+            }
+            advertPostDomainModel.Tags = selectedTags;
+            // submit information to repository to update
+
+           var updatedAdvert =  await advertPostRepository.UpdateAsync(advertPostDomainModel);
+
+            if (updatedAdvert != null)
+            {
+                // show success notification
+                return RedirectToAction("Edit");
+            }
+            // show error notification
+            return RedirectToAction("Edit");
+
+            // redirect to GET method
+        }
+
     }
 }

@@ -36,9 +36,31 @@ namespace MyFirst.Web.Repositories
             return await myFirstWebDbContext.AdvertPosts.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<AdvertPost?> UpdateAsync(AdvertPost advertPost)
+        public async Task<AdvertPost?> UpdateAsync(AdvertPost advertPost)
         {
-            throw new NotImplementedException();
+            var existingAdvert = await myFirstWebDbContext.AdvertPosts.Include(x=> x.Tags)
+                .FirstOrDefaultAsync(x => x.Id == advertPost.Id);
+
+            if (existingAdvert != null)
+            {
+                existingAdvert.Id = advertPost.Id;
+                existingAdvert.Heading = advertPost.Heading;
+                existingAdvert.PageTitle = advertPost.PageTitle;
+                existingAdvert.Content = advertPost.Content;
+                existingAdvert.ShortDescription = advertPost.ShortDescription;
+                existingAdvert.Author = advertPost.Author;
+                existingAdvert.FeaturedImageUrl = advertPost.FeaturedImageUrl;
+                existingAdvert.UrlHandle = advertPost.UrlHandle;
+                existingAdvert.Visible = advertPost.Visible;
+                existingAdvert.PublishedDate = advertPost.PublishedDate;
+                existingAdvert.Tags = advertPost.Tags;
+
+                await myFirstWebDbContext.SaveChangesAsync();
+
+                return (existingAdvert);
+
+            }
+            return null;
         }
     }
 }
