@@ -9,6 +9,10 @@
 
 
 <div class="container py-5">
+    @if (Model != null)
+    {
+        
+    
     <table class="table">
         <thead>
             <tr> 
@@ -46,6 +50,12 @@
                 </tr>
             }
         </tbody>
-    </table>
+        </table>
 
+    }
+
+    else
+    {
+            <p> No tags found</p>
+    }
 </div>
