@@ -16,3 +16,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.advert-details-content img {
+    max-width: 100%;
+}

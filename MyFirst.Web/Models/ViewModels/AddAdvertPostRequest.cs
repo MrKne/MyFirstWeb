@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.ObjectPool;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyFirst.Web.Models.ViewModels
 {
+
     public class AddAdvertPostRequest
     {
         public string Heading { get; set; }
@@ -11,7 +14,10 @@ namespace MyFirst.Web.Models.ViewModels
         public string ShortDescription { get; set; }
         public string FeaturedImageUrl { get; set; }
         public string UrlHandle { get; set; }
-        public DateTime PublishedDate { get; set; }
+
+        public DateTime PublishedDate { get; set; } = DateTime.Today;
+                      
+        
         public string Author { get; set; }
         public bool Visible { get; set; }
 

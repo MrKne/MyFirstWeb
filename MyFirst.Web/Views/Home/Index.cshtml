@@ -1,8 +1,91 @@
-﻿@{
+﻿@model MyFirst.Web.Models.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+        
+        <div class="col-12 col-lg-6"> 
+        <h1 class="display-5 fw-bold lh-1 mb-3"> 
+            MyFristWeb - The Advert Site
+        </h1>    
+        <p class="lead">
+            This is my first web which is meant to post advertising diffrent contractors which you can hire depending on your needs. 
+            If you are a contractor for a small fee you can advertise yorself on this popular site!
+            Ty and please love me.
+        </p>
+        </div>
+
+
+
+        <div class="col-12 col-lg-6">
+            <img src="https://images.pexels.com/photos/3760613/pexels-photo-3760613.jpeg?auto=compress&cs=tinysrgb&w=600"
+                 alt="webphoto-advert" class="d-block mx-lg-auto img-fluid" width="600" />
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 d-flex">
+            @if (Model!=null && Model.Tags.Any())
+            {
+                foreach (var tag in Model.Tags)
+                {
+                    {
+                        <span class="badge bg-dark me-1"> @tag.Name</span>
+
+                    }
+                }
+            }
+        </div>
+
+    </div>
+    </div>
+
+
+<div class="container-fluid"> 
+    <div class="row justify-content-center">
+        <div class="col-6 container-fluid">
+
+            @if (Model != null && Model.AdvertPosts.Any())
+            {
+                foreach (var advertPost in Model.AdvertPosts)
+                {
+                    <div class="mb-5 p-5 bg-light box-shadow"> 
+
+                        <img src="@advertPost.FeaturedImageUrl" alt="@advertPost.Heading" class="mb-2 d-block img-fluid" />
+                        <h2 class="mb-4"> @advertPost.Heading </h2>
+                        <p class="mb-4"> @advertPost.Author <br/>
+
+                            Published Date: @advertPost.PublishedDate.ToShortDateString()</p>
+
+                            <p class="mb-4">
+                            @foreach (var tag in advertPost.Tags)
+                            {
+                                <span class="badge bg-secondary me-1"> @tag.Name</span>
+
+
+                            }
+                            </p>
+
+                        <p class="mb-4"> @advertPost.ShortDescription </p>
+                        <a class="btn btn-dark" 
+                        asp-area=""
+                        asp-controller="Adverts"
+                        asp-action="Index"
+                        asp-route-urlHandle="@advertPost.UrlHandle"> Read More </a>
+                       
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
 </div>

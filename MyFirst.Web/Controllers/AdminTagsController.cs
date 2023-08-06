@@ -48,7 +48,7 @@ namespace MyFirst.Web.Controllers
             return View(tags);
         }
         [HttpGet]
-        public async Task<IActionResult> EditTheTag(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             var tag = await tagRepository.GetAsync(id);
             if (tag !=null)

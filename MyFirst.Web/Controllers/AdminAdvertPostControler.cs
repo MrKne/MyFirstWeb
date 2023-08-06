@@ -173,6 +173,21 @@ public class AdminAdvertPostControler : Controller
 
             // redirect to GET method
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete (EditAdvertPostRequest editAdvertPostRequest)
+        {
+            // talk to repository to delete advert and tags
+           var deletedAdvertPost = await advertPostRepository.DeleteAsync(editAdvertPostRequest.Id);
 
+            if (deletedAdvertPost != null)
+            {
+                //show success notification
+                return RedirectToAction("List");
+            }
+
+            //show error nitification
+            return RedirectToAction("Edit", new {id = editAdvertPostRequest.Id} );
+         
+        }
     }
 }
