@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
 using MyFirst.Web.Models.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyFirst.Web.Controllers
 {
-public class AdminAdvertPostControler : Controller
+    [Authorize(Roles = "Admin")]
+    public class AdminAdvertPostControler : Controller
     {
     private readonly ITagRepository tagRepository;
     private readonly IAdvertPostRepository advertPostRepository;

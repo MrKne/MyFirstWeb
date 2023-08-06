@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyFirst.Web.Data;
 using MyFirst.Web.Models.Domain;
@@ -7,6 +8,8 @@ using MyFirst.Web.Repositories;
 
 namespace MyFirst.Web.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class AdminTagsController : Controller
     {
         private readonly ITagRepository tagRepository;
@@ -16,13 +19,15 @@ namespace MyFirst.Web.Controllers
             this.tagRepository = tagRepository;
         }
 
-
+      
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
         [HttpPost]
+
+     
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequest addTagRequest)
         {
@@ -37,7 +42,8 @@ namespace MyFirst.Web.Controllers
 
             return RedirectToAction("List");
         }
-        
+
+       
         [HttpGet]
         [ActionName("List")]
         public async Task<IActionResult> List()
@@ -47,6 +53,8 @@ namespace MyFirst.Web.Controllers
             var tags = await tagRepository.GetAllAsync();
             return View(tags);
         }
+
+    
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
