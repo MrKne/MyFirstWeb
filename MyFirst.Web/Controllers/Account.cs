@@ -51,9 +51,14 @@ namespace MyFirst.Web.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
-            return View();
+            var model = new Login
+            {
+                ReturnUrl = ReturnUrl
+            };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -63,6 +68,12 @@ namespace MyFirst.Web.Controllers
 
             if (signInResult !=null && signInResult.Succeeded)
             {
+                if (!string.IsNullOrWhiteSpace(login.ReturnUrl))
+                    {
+                    return Redirect(login.ReturnUrl);
+               
+                
+                    }
                 return RedirectToAction("Index", "Home");
             }
 
