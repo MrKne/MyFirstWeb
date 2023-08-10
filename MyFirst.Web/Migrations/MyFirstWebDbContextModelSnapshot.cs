@@ -82,6 +82,25 @@ namespace MyFirst.Web.Migrations
                     b.ToTable("AdvertPosts");
                 });
 
+            modelBuilder.Entity("MyFirst.Web.Models.Domain.AdvertPostLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AdvertPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdvertPostId");
+
+                    b.ToTable("AdvertPostsLike");
+                });
+
             modelBuilder.Entity("MyFirst.Web.Models.Domain.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -114,6 +133,20 @@ namespace MyFirst.Web.Migrations
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MyFirst.Web.Models.Domain.AdvertPostLike", b =>
+                {
+                    b.HasOne("MyFirst.Web.Models.Domain.AdvertPost", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("AdvertPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MyFirst.Web.Models.Domain.AdvertPost", b =>
+                {
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }
