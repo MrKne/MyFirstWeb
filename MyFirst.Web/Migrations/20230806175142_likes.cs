@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyFirst.Web.Migrations
 {
-    public partial class addmigrationinital : Migration
+    public partial class likes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,6 +43,25 @@ namespace MyFirst.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AdvertPostsLike",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AdvertPostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdvertPostsLike", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AdvertPostsLike_AdvertPosts_AdvertPostId",
+                        column: x => x.AdvertPostId,
+                        principalTable: "AdvertPosts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AdvertPostTag",
                 columns: table => new
                 {
@@ -67,6 +86,11 @@ namespace MyFirst.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AdvertPostsLike_AdvertPostId",
+                table: "AdvertPostsLike",
+                column: "AdvertPostId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AdvertPostTag_TagsId",
                 table: "AdvertPostTag",
                 column: "TagsId");
@@ -74,6 +98,9 @@ namespace MyFirst.Web.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AdvertPostsLike");
+
             migrationBuilder.DropTable(
                 name: "AdvertPostTag");
 
