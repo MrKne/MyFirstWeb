@@ -1,4 +1,7 @@
-﻿@model MyFirst.Web.Models.Domain.AdvertPost
+﻿@model MyFirst.Web.Models.ViewModels.AdvertDetailsViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
 @{
     ViewData["Title"] = Model.PageTitle;
 }
@@ -14,7 +17,21 @@
                     <span class="text-secondary">@Model.Author</span>
                     <span class="text-secondary">@Model.PublishedDate.ToShortDateString()</span>
                 </div>
+
+
+                    <div class="mb-3">
+                @if (signInManager.IsSignedIn(User)) 
+                {
+                    <a id="btnLike" style="cursor: pointer;">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                    </a>
+
+                }
+                        
+                        <span>@Model.TotalLikes </span> likes
+                        </div>
                 <div class="mb-3 d-flex">
+
 
                     @foreach (var tag in Model.Tags)
                     {
@@ -44,3 +61,34 @@
     </div>
 
 </div>
+
+
+@section Scripts {
+               
+    <script>
+        const btnLikeElement = document.getElementById('btnLike');
+        async function addLikeForAdvert() 
+        {
+            fetch('/api/AdvertPostLike/Add',
+            {
+                method: 'Post',
+                headers: 
+                {
+                    'Content-Type' : 'application/json',
+                    'Accept' : '*/*'
+                },
+                body: JSON.stringify({
+                    advertPostId: '@Model.Id',
+                    userId: '@userManager.GetUserId(User)'
+                })
+            }).then(console.log('Request Done'))
+          }
+
+          btnLikeElement.addEventListener('click',addLikeForAdvert);
+    </script>
+
+
+
+
+
+}
