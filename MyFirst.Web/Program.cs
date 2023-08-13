@@ -32,6 +32,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IAdvertPostRepository, AdvertPostRepository>();
 builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
+builder.Services.AddScoped<IAdvertPostLikeRepository, AdvertPostLikeRepository>();
 
 var app = builder.Build();
 
