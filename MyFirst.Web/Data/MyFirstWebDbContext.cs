@@ -15,5 +15,7 @@ namespace MyFirst.Web.Data
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<AdvertPostLike> AdvertPostsLike { get; set;}
+
+        public DbSet<AdvertPostComment> AdvertPostsComment { get; set; }
     }
 }

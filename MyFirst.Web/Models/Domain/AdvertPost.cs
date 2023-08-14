@@ -18,5 +18,7 @@
 
         public ICollection<AdvertPostLike> Likes { get; set; } 
 
+        public ICollection<AdvertPostComment> Comments { get; set; }
+
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFirst.Web.Data;
 
@@ -11,9 +12,10 @@ using MyFirst.Web.Data;
 namespace MyFirst.Web.Migrations
 {
     [DbContext(typeof(MyFirstWebDbContext))]
-    partial class MyFirstWebDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230814155936_Adding comments Database")]
+    partial class AddingcommentsDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,10 +95,6 @@ namespace MyFirst.Web.Migrations
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
