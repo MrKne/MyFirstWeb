@@ -6,6 +6,7 @@ namespace MyFirst.Web.Repositories
     {
         Task<int> GetTotalLikes(Guid AdvertPostId);
 
+        Task<IEnumerable<AdvertPostLike>> GetLikesForAdvert(Guid AdvertPostId);
         Task<AdvertPostLike> AddLikeforAdvert(AdvertPostLike advertPostLike);
 
     }

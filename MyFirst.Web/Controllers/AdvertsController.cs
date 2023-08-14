@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyFirst.Web.Models.ViewModels;
 using MyFirst.Web.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace MyFirst.Web.Controllers
 {
@@ -9,17 +10,25 @@ namespace MyFirst.Web.Controllers
     {
         private readonly IAdvertPostRepository advertPostRepository;
         private readonly IAdvertPostLikeRepository advertPostLikeRepository;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
 
         public AdvertsController(IAdvertPostRepository advertPostRepository,
-            IAdvertPostLikeRepository advertPostLikeRepository)
+            IAdvertPostLikeRepository advertPostLikeRepository,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager)
+        
         {
             this.advertPostRepository = advertPostRepository;
             this.advertPostLikeRepository = advertPostLikeRepository;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index(string urlHandle)
         {
+            var liked = false;
             var advertPost = await advertPostRepository.GetByUrlHandleAsync(urlHandle);
             var advertDetailsViewModel = new AdvertDetailsViewModel();
 
@@ -27,6 +36,21 @@ namespace MyFirst.Web.Controllers
             if (advertPost != null)
             {
                 var totalLikes = await advertPostLikeRepository.GetTotalLikes(advertPost.Id);
+
+                if (signInManager.IsSignedIn(User))
+                {
+                    //Get like for this advert for this user
+                    var likesForAdvert = await advertPostLikeRepository.GetLikesForAdvert(advertPost.Id);
+
+                    var userId = userManager.GetUserId(User);
+
+                    if (userId != null)
+                    {
+                       var likeFromUser = likesForAdvert.FirstOrDefault(x => x.UserId == Guid.Parse(userId));
+                        liked = likeFromUser != null;
+                    }
+
+                }
 
                 advertDetailsViewModel = new AdvertDetailsViewModel
                 {
@@ -41,7 +65,8 @@ namespace MyFirst.Web.Controllers
                     UrlHandle = advertPost.UrlHandle,
                     Visible = advertPost.Visible,
                     Tags = advertPost.Tags,
-                    TotalLikes = totalLikes
+                    TotalLikes = totalLikes,
+                    Liked = liked,
 
                 };
 

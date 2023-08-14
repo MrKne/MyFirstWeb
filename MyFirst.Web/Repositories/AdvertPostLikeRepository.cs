@@ -21,6 +21,11 @@ namespace MyFirst.Web.Repositories
             return advertPostLike;
         }
 
+        public async Task<IEnumerable<AdvertPostLike>> GetLikesForAdvert(Guid AdvertPostId)
+        {
+            return await myFirstWebDbContext.AdvertPostsLike.Where(x => x.AdvertPostId == AdvertPostId)
+                .ToListAsync();
+        }
 
         public async Task<int> GetTotalLikes(Guid AdvertPostId)
         {
