@@ -39,5 +39,20 @@ namespace MyFirst.Web.Controllers
             return Ok();
 
         }
+
+        [HttpGet]
+        [Route("{advertPostId:Guid}/totalLikes")]
+        
+        public async Task<IActionResult> GetTotalLikesForAdvert([FromRoute] Guid advertPostId) 
+        
+        {
+
+
+            var totalLikes = await advertPostLikeRepository.GetTotalLikes(advertPostId);
+            return Ok(totalLikes);
+
+        }
+
+        
     }
 }
