@@ -34,6 +34,7 @@ builder.Services.AddScoped<IAdvertPostRepository, AdvertPostRepository>();
 builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
 builder.Services.AddScoped<IAdvertPostLikeRepository, AdvertPostLikeRepository>();
 builder.Services.AddScoped<IAdvertPostCommentRepository, AdvertPostCommentRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
