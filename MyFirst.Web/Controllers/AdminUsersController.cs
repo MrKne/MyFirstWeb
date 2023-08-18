@@ -8,7 +8,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace MyFirst.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Developer")]
     public class AdminUsersController : Controller
     {
         private readonly IUserRepository userRepository;

@@ -24,30 +24,33 @@ namespace MyFirst.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            var identityUser = new IdentityUser
-            { UserName = registerViewModel.Username,
-                Email = registerViewModel.Email
-            };
 
-
-
-
-
-            var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
-
-            if (identityResult.Succeeded)
+            if (ModelState.IsValid)
             {
-                //asign this user the "User" role
-                var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
+                var identityUser = new IdentityUser
 
-                if (roleIdentityResult.Succeeded)
                 {
-                    //Show success notification
-                    return RedirectToAction("Register");
+                    UserName = registerViewModel.Username,
+                    Email = registerViewModel.Email
+                };
+
+                var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
+
+                if (identityResult.Succeeded)
+                {
+                    //asign this user the "User" role
+                    var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
+
+                    if (roleIdentityResult.Succeeded)
+                    {
+                        //Show success notification
+                        return RedirectToAction("Register");
+                    }
+
                 }
-               
             }
-            // show Error notification
+
+           // show Error notification
             return View();
         }
         [HttpGet]
@@ -64,6 +67,10 @@ namespace MyFirst.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login (Login login)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             var signInResult = await signInManager.PasswordSignInAsync(login.Username, login.Password, false, false);
 
             if (signInResult !=null && signInResult.Succeeded)

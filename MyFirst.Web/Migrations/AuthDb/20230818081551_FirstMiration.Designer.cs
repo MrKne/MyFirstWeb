@@ -12,8 +12,8 @@ using MyFirst.Web.Data;
 namespace MyFirst.Web.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20230806123715_Creating Auth Db")]
-    partial class CreatingAuthDb
+    [Migration("20230818081551_FirstMiration")]
+    partial class FirstMiration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,15 +168,15 @@ namespace MyFirst.Web.Migrations.AuthDb
                         {
                             Id = "9dfa7209-45b7-4f56-abd4-82a6d54efaac",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "117aa3e3-615e-420b-a74a-326a7a5d8165",
+                            ConcurrencyStamp = "72285076-a7a9-4c01-aef5-70d42455b118",
                             Email = "developer@myfirstweb.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DEVELOPER@MYFIRSTWEB.COM",
                             NormalizedUserName = "DEVELOPER@MYFIRSTWEB.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHJ61AuWc6/IYuIK5hTIOsgkDEhkzvaUI2nj69kODZBvR+wtBdSwUmWakKcXAcN8Qw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGZAAmTASBuhG7L2bkeeGRFWqywwJ4PdDdUn9AASTtxTsUCKB6bjbeAHb3HP0fekhg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "780751c3-73c3-44b7-aea5-c449fa67700f",
+                            SecurityStamp = "5d65120a-9e8c-435a-9f6c-196477e157d2",
                             TwoFactorEnabled = false,
                             UserName = "developer@myfirstweb.com"
                         });

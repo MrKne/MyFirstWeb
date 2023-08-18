@@ -8,8 +8,7 @@ using MyFirst.Web.Repositories;
 
 namespace MyFirst.Web.Controllers
 {
-
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Developer,Admin")]
     public class AdminTagsController : Controller
     {
         private readonly ITagRepository tagRepository;
@@ -25,12 +24,18 @@ namespace MyFirst.Web.Controllers
         {
             return View();
         }
-        [HttpPost]
 
-     
+
+        [HttpPost]
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequest addTagRequest)
         {
+            ValidateAddTagRequest(addTagRequest);
+
+            if (ModelState.IsValid == false)
+            {
+                return View();
+            }
             // Mapping AddTagRequest to Tag domain model
             var tag = new Tag
             {
@@ -125,6 +130,17 @@ namespace MyFirst.Web.Controllers
 
             }
             return RedirectToAction("Edit", new {id = editTagRequest.Id});
+        }
+
+        private void ValidateAddTagRequest (AddTagRequest addTagRequest)
+        {
+            if (addTagRequest.Name is not null && addTagRequest.DisplayName is not null)
+            {
+                if (addTagRequest.Name == addTagRequest.DisplayName)
+                {
+                    ModelState.AddModelError("DisplayName", "Name cannot be the same as Display Name");
+                }
+            }
         }
     }
 

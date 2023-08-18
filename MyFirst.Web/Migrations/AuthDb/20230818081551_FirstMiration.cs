@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyFirst.Web.Migrations.AuthDb
 {
-    public partial class CreatingAuthDb : Migration
+    public partial class FirstMiration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -167,7 +167,7 @@ namespace MyFirst.Web.Migrations.AuthDb
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9dfa7209-45b7-4f56-abd4-82a6d54efaac", 0, "117aa3e3-615e-420b-a74a-326a7a5d8165", "developer@myfirstweb.com", false, false, null, "DEVELOPER@MYFIRSTWEB.COM", "DEVELOPER@MYFIRSTWEB.COM", "AQAAAAEAACcQAAAAEHJ61AuWc6/IYuIK5hTIOsgkDEhkzvaUI2nj69kODZBvR+wtBdSwUmWakKcXAcN8Qw==", null, false, "780751c3-73c3-44b7-aea5-c449fa67700f", false, "developer@myfirstweb.com" });
+                values: new object[] { "9dfa7209-45b7-4f56-abd4-82a6d54efaac", 0, "72285076-a7a9-4c01-aef5-70d42455b118", "developer@myfirstweb.com", false, false, null, "DEVELOPER@MYFIRSTWEB.COM", "DEVELOPER@MYFIRSTWEB.COM", "AQAAAAEAACcQAAAAEGZAAmTASBuhG7L2bkeeGRFWqywwJ4PdDdUn9AASTtxTsUCKB6bjbeAHb3HP0fekhg==", null, false, "5d65120a-9e8c-435a-9f6c-196477e157d2", false, "developer@myfirstweb.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
