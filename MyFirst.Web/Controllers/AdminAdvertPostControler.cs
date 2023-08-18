@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MyFirst.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Developer,Admin")]
+
+
     public class AdminAdvertPostControler : Controller
     {
     private readonly ITagRepository tagRepository;
