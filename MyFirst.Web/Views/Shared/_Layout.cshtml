@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> signInManager
+@model MyFirst.Web.Models.ViewModels.AdvertDetailsViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +20,12 @@
 
 </head>
 <body>
+   
+
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow">
+            <div class="container" id="navbg">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyFirst.Web</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +92,29 @@
                              
                             </ul>
                         </li>
+
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li>
+                       
+
+
+                        <form class="form-inline d-flex" asp-controller="Adverts" asp-action="SearchByTag">
+                            <asp:textbox id="SingleText"
+                                         text="Single Line TextBox"
+                                         runat="server"
+                                         class="form-control mr-sm-2" />
+                            
+                            <button class="btn m-2 btn-outline-success my-2 my-sm-0 btn-close-white" type="submit">Search</button>
+                            @ViewBag.Name;
+                        </form>
+                        }
+
                     </ul>
                     <div class="d-flex align-items-center">
                         @if (signInManager.IsSignedIn(User))
@@ -134,7 +160,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - MyFirst.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - MyFirst.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика на користење</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

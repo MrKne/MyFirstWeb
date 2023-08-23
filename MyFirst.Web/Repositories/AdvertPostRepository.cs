@@ -36,15 +36,21 @@ namespace MyFirst.Web.Repositories
         public async Task<IEnumerable<AdvertPost>> GetAllAsync()
         {
             return await myFirstWebDbContext.AdvertPosts.Include(x => x.Tags).ToListAsync();
-           
+         
         }
 
         public async Task<AdvertPost?> GetAsync(Guid id)
         {
             return await myFirstWebDbContext.AdvertPosts.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id);
         }
-        
-   
+
+        //public async Task<AdvertPost> GetByTagAsync(string tagName)
+        //{
+
+        //   var allAdverts = await myFirstWebDbContext.AdvertPosts.Include(x => x.Tags).Where(.Content.Contains(tagName));
+        //    var searchedAdverts = await 
+        //}
+
         public async Task<AdvertPost?> GetByUrlHandleAsync(string urlHandle)
         {
          return await myFirstWebDbContext.AdvertPosts.Include(x=> x.Tags)
@@ -77,5 +83,7 @@ namespace MyFirst.Web.Repositories
             }
             return null;
         }
+
+        
     }
 }

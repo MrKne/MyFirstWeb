@@ -4,6 +4,10 @@ using MyFirst.Web.Models.ViewModels;
 using MyFirst.Web.Repositories;
 using Microsoft.AspNetCore.Identity;
 using MyFirst.Web.Models.Domain;
+using MyFirst.Web.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
+using AspNetCore;
 
 namespace MyFirst.Web.Controllers
 {
@@ -108,11 +112,24 @@ namespace MyFirst.Web.Controllers
                 
                 await advertPostCommentRepository.AddAsync(domainModel);
                 return RedirectToAction("Index", "Adverts", 
-                    new {urlHandle = advertDetailsViewModel.UrlHandle});
+                new {urlHandle = advertDetailsViewModel.UrlHandle});
             }
 
             return View();
             
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SearchByTag(string tagName)
+        {
+
+            tagName = ViewBag.Name;
+
+
+            return View();
+        }
+
+        
     }
 }

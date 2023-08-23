@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container col-xxl-8 px-4 py-5">
+@*<div class="container col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-5 py-5">
         
         <div class="col-12 col-lg-6"> 
@@ -25,13 +25,13 @@
                  alt="webphoto-advert" class="d-block mx-lg-auto img-fluid" width="600" />
         </div>
 
-    </div>
+      </div>
 
 
 </div>
+*@
 
-
-<div class="container">
+<div class="container px-4 py-5">
     <div class="row justify-content-center">
         <div class="col-6 d-flex">
             @if (Model!=null && Model.Tags.Any())
@@ -58,7 +58,7 @@
             {
                 foreach (var advertPost in Model.AdvertPosts)
                 {
-                    <div class="mb-5 p-5 bg-light box-shadow"> 
+                    <div id="advertIndex" class="mb-5 p-5 box-shadow"> 
 
                         <img src="@advertPost.FeaturedImageUrl" alt="@advertPost.Heading" class="mb-2 d-block img-fluid" />
                         <h2 class="mb-4"> @advertPost.Heading </h2>

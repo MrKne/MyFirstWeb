@@ -9,7 +9,9 @@ namespace MyFirst.Web.Repositories
         Task <AdvertPost> AddAsync(AdvertPost advertPost);
         Task<AdvertPost?> UpdateAsync(AdvertPost advertPost);   
         Task <AdvertPost?> DeleteAsync(Guid id);
+        //Task<AdvertPost> GetByTagAsync(string tagName);
 
-       
+
+
     }
 }

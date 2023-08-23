@@ -8,7 +8,7 @@
 <div class="container my-5"> 
     <div class="row justify-content-center">
         <div class="col-12 col-lg-6">
-
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0" nonce="r1HvH5YQ"></script>
 
             @if (Model !=null )
             {
@@ -51,7 +51,12 @@
 
                     }
 
+                   @* Share on Facebook*@
                 </div>
+                <div class="fb-share-button" data-href="@Model.UrlHandle" data-layout="" data-size="">
+                    <a target="@Model.UrlHandle" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                        СПОДЕЛИ </a>
+                    </div>
                 <img src="@Model.FeaturedImageUrl" class="d-block img-fluid mb-3">
                 <div class="mb-3 advert-details-content">
                 

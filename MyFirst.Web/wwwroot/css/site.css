@@ -14,9 +14,18 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #f1edde;
 }
 
 .advert-details-content img {
     max-width: 100%;
+}
+
+header {
+    background-color: #051333;
+}
+
+#advertIndex {
+    background-color: #f4f1e8;
 }
