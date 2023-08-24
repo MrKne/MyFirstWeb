@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <header>
+    <header class="mb-5">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyFirst.Web</a>
@@ -89,7 +89,24 @@
                             </ul>
                         </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                        </li>
+
+            
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                        </li>
+
+                        <form class="d-flex" method="post" asp-controller="Home" asp-action="Search" enctype="multipart/form-data">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" runat="server">
+                            <button class="btn btn-dark my-2 my-sm-0 m-2" type="submit">Search</button>
+                            @ViewBag.Name
+                        </form>
                     </ul>
+
+               
+
                     <div class="d-flex align-items-center">
                         @if (signInManager.IsSignedIn(User))
                         {
@@ -134,7 +151,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - MyFirst.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - MyFirst.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика за користење</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

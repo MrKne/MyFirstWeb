@@ -10,6 +10,7 @@ namespace MyFirst.Web.Repositories
         Task<AdvertPost?> UpdateAsync(AdvertPost advertPost);   
         Task <AdvertPost?> DeleteAsync(Guid id);
 
-       
+
+
     }
 }

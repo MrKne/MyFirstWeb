@@ -6,5 +6,6 @@ namespace MyFirst.Web.Models.ViewModels
     {
         public IEnumerable<AdvertPost> AdvertPosts { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
+
     }
 }

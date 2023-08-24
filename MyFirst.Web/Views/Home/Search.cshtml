@@ -1,0 +1,148 @@
+﻿@model MyFirst.Web.Models.ViewModels.HomeViewModel
+
+
+
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-6 d-flex">
+            @if (Model != null && Model.Tags.Any())
+            {
+                foreach (var tag in Model.Tags)
+                {
+                    {
+                        <span class="badge bg-dark me-1"> @tag.Name</span>
+
+                    }
+                }
+            }
+        </div>
+            
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6 container-fluid">
+
+            
+            @if (Model != null && Model.AdvertPosts.Any())
+            {
+         
+                foreach (var advertPost in Model.AdvertPosts)
+                {
+
+                    foreach (var searchTag in advertPost.Tags) 
+                    {
+                        if(searchTag.Name == ViewBag.Name) 
+                        {
+
+                    <div class="mb-5 p-5 bg-light box-shadow">
+
+                        <img src="@advertPost.FeaturedImageUrl" alt="@advertPost.Heading" class="mb-2 d-block img-fluid" />
+                        <h2 class="mb-4"> @advertPost.Heading </h2>
+                        <p class="mb-4">
+                            @advertPost.Author <br />
+
+                            Published Date: @advertPost.PublishedDate.ToShortDateString()
+                        </p>
+
+                        <p class="mb-4">
+                            @foreach (var tag in advertPost.Tags)
+                            {
+                                <span class="badge bg-secondary me-1"> @tag.Name</span>
+
+
+                            }
+                        </p>
+
+                        <p class="mb-4"> @advertPost.ShortDescription </p>
+                        <a class="btn btn-dark"
+                   asp-area=""
+                   asp-controller="Adverts"
+                   asp-action="Index"
+                   asp-route-urlHandle="@advertPost.UrlHandle"> Read More </a>
+
+                            </div>
+                        }
+
+                       
+                    }
+            
+              }
+            
+            }
+                </div>
+                    </div>
+                        </div>
+            
+            
+
+            
+@*<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6 container-fluid">
+
+
+            @if (Model != null && Model.AdvertPosts.Any())
+            
+
+                foreach (var advertPost in Model.AdvertPosts)
+                
+                    
+                        @foreach (var tag in advertPost.Tags) 
+                        {
+                        if(tag.Name == ViewBag.Name || advertPost.Heading == ViewBag.Name || advertPost.Content.Contains(ViewBag.Name))
+                        {
+
+                            <p class="mb-4">
+                                {
+                            <span class="badge bg-secondary me-1"> @tag.Name</span>
+
+
+                        }
+                            </p>
+
+
+                    foreach (var searchTag in advertPost.Tags)
+                    {
+                        
+                        {
+
+                    <div class="mb-5 p-5 bg-light box-shadow">
+
+                        <img src="@advertPost.FeaturedImageUrl" alt="@advertPost.Heading" class="mb-2 d-block img-fluid" />
+                        <h2 class="mb-4"> @advertPost.Heading </h2>
+                        <p class="mb-4">
+                            @advertPost.Author <br />
+
+                            Published Date: @advertPost.PublishedDate.ToShortDateString()
+                        </p>
+
+                        
+
+                        <p class="mb-4"> @advertPost.ShortDescription </p>
+                        <a class="btn btn-dark"
+                   asp-area=""
+                   asp-controller="Adverts"
+                   asp-action="Index"
+                   asp-route-urlHandle="@advertPost.UrlHandle"> Read More </a>
+
+                            </div>
+                        }
+
+                                
+                    }
+                    
+              }
+
+            }
+               </div>
+    </div>
+</div>
+*@
+            
+
+
+     
+
