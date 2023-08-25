@@ -2,7 +2,7 @@
 
 
 
-<div class="container mb-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-6 d-flex">
             @if (Model != null && Model.Tags.Any())
@@ -10,18 +10,33 @@
                 foreach (var tag in Model.Tags)
                 {
                     {
-                        <span class="badge bg-dark me-1"> @tag.Name</span>
+                        <span>
+
+
+
+                            <form class="d-flex" method="post" asp-controller="Home" asp-action="Search" enctype="multipart/form-data">
+                                <input class="form-control mr-sm-2" type="hidden" placeholder="Search by tag" aria-label="Search" name="search" id="search" runat="server" value="@tag.Name">
+                                <button class="badge bg-dark me-1" type="submit">@tag.Name</button>
+                               
+                            </form>
+
+
+
+                        </span>
+
+
+
 
                     }
                 }
             }
         </div>
-            
+
     </div>
 </div>
 
 
-<div class="container-fluid">
+    <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-6 container-fluid">
 
@@ -32,9 +47,9 @@
                 foreach (var advertPost in Model.AdvertPosts)
                 {
 
-                    foreach (var searchTag in advertPost.Tags) 
+                    foreach (var tag in advertPost.Tags) 
                     {
-                        if(searchTag.Name == ViewBag.Name) 
+                        if(tag.Name == ViewBag.Name) 
                         {
 
                     <div class="mb-5 p-5 bg-light box-shadow">
@@ -48,12 +63,13 @@
                         </p>
 
                         <p class="mb-4">
-                            @foreach (var tag in advertPost.Tags)
-                            {
-                                <span class="badge bg-secondary me-1"> @tag.Name</span>
 
 
-                            }
+                                    <form class="d-flex" method="post" asp-controller="Home" asp-action="Search" enctype="multipart/form-data">
+                                        <input class="form-control mr-sm-2" type="hidden" placeholder="Search by tag" aria-label="Search" name="search" id="search" runat="server" value="@tag.Name">
+                                        <button class="badge bg-dark me-1" type="submit">@tag.Name</button>
+
+                                    </form>
                         </p>
 
                         <p class="mb-4"> @advertPost.ShortDescription </p>
@@ -63,20 +79,28 @@
                    asp-action="Index"
                    asp-route-urlHandle="@advertPost.UrlHandle"> Read More </a>
 
-                            </div>
-                        }
+                   
+               
+               </div>
 
-                       
+               
+
+                        }
+                                               
                     }
             
+
               }
-            
+                
             }
+           
                 </div>
-                    </div>
-                        </div>
+       </div>
+</div>
             
             
+
+
 
             
 @*<div class="container-fluid">

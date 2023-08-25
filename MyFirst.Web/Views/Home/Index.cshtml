@@ -13,7 +13,22 @@
                 foreach (var tag in Model.Tags)
                 {
                     {
-                        <span class="badge bg-dark me-1"> @tag.Name</span>
+                        <span>
+                   
+
+
+                            <form class="d-flex" method="post" asp-controller="Home" asp-action="Search" enctype="multipart/form-data">
+                                <input class="form-control mr-sm-2" type="hidden" placeholder="Search by tag" aria-label="Search" name="search" id="search" runat="server" value="@tag.Name">
+                                <button class="badge bg-dark me-1" type="submit">@tag.Name</button>
+                                @ViewBag.Name
+                            </form>
+
+
+
+                        </span>
+
+       
+
 
                     }
                 }
@@ -40,11 +55,18 @@
 
                             Published Date: @advertPost.PublishedDate.ToShortDateString()</p>
 
-                            <p class="mb-4">
+                            <p class="mb-4 d-flex">
                             @foreach (var tag in advertPost.Tags)
                             {
-                                <span class="badge bg-secondary me-1"> @tag.Name</span>
+                               
 
+                                    <form class="d-lg-inline-flex" method="post" asp-controller="Home" asp-action="Search" enctype="multipart/form-data">
+                                        <input class="form-control mr-sm-2" type="hidden" placeholder="Search by tag" aria-label="Search" name="search" id="search" runat="server" value="@tag.Name">
+                                        <button class="badge bg-dark me-1" type="submit">@tag.Name</button>
+                                        @ViewBag.Name
+                                    </form>
+
+                             
 
                             }
                             </p>

@@ -39,7 +39,7 @@ namespace MyFirst.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(string search)
+        public async Task<IActionResult> Search(string search, string link)
         {
             //getting all adverts
             var advertPosts = await advertPostRepository.GetAllAsync();
@@ -90,7 +90,10 @@ namespace MyFirst.Web.Controllers
             //}
 
 
-            ViewBag.Name = search;
+            //ViewBag.Link = link;
+            ViewBag.Link = link;
+                ViewBag.Name = search;
+
             return View(model);
         }
 
