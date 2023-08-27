@@ -42,17 +42,21 @@
 
             
             @if (Model != null && Model.AdvertPosts.Any())
-            {
-         
+            { 
+                bool condition = false;
+                 
                 foreach (var advertPost in Model.AdvertPosts)
                 {
 
-                    foreach (var tag in advertPost.Tags) 
+                    foreach (var tag in advertPost.Tags)
                     {
-                        if(tag.Name == ViewBag.Name) 
-                        {
 
-                    <div class="mb-5 p-5 bg-light box-shadow">
+                        if (tag.Name == ViewBag.Name)
+                   
+                        {
+                          condition = true;
+
+                        <div class="mb-5 p-5 bg-light box-shadow">  
 
                         <img src="@advertPost.FeaturedImageUrl" alt="@advertPost.Heading" class="mb-2 d-block img-fluid" />
                         <h2 class="mb-4"> @advertPost.Heading </h2>
@@ -61,112 +65,60 @@
 
                             Published Date: @advertPost.PublishedDate.ToShortDateString()
                         </p>
-
+                           
                         <p class="mb-4">
-
-
                                     <form class="d-flex" method="post" asp-controller="Home" asp-action="Search" enctype="multipart/form-data">
-                                        <input class="form-control mr-sm-2" type="hidden" placeholder="Search by tag" aria-label="Search" name="search" id="search" runat="server" value="@tag.Name">
+                                        <input class="form-control mr-sm-2" type="hidden" placeholder="Search by tag" aria-label="Search" name="name" id="search" runat="server" value="@tag.Name">
                                         <button class="badge bg-dark me-1" type="submit">@tag.Name</button>
-
                                     </form>
                         </p>
 
                         <p class="mb-4"> @advertPost.ShortDescription </p>
                         <a class="btn btn-dark"
-                   asp-area=""
-                   asp-controller="Adverts"
-                   asp-action="Index"
-                   asp-route-urlHandle="@advertPost.UrlHandle"> Read More </a>
-
-                   
-               
-               </div>
-
-               
+                            asp-area=""
+                            asp-controller="Adverts"
+                            asp-action="Index"
+                            asp-route-urlHandle="@advertPost.UrlHandle"> Read More </a>
+                          </div>
 
                         }
-                                               
+
                     }
             
 
+
               }
-                
+                if (condition == false) {
+                    <div class="mb-5 p-5 bg-light box-shadow"> 
+                        No advert with such tag was found, please write or click some of the given tags 
+                    </div>
+                }
+
             }
            
                 </div>
        </div>
 </div>
             
-            
-
-
 
             
-@*<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-6 container-fluid">
 
 
-            @if (Model != null && Model.AdvertPosts.Any())
-            
 
-                foreach (var advertPost in Model.AdvertPosts)
-                
-                    
-                        @foreach (var tag in advertPost.Tags) 
-                        {
-                        if(tag.Name == ViewBag.Name || advertPost.Heading == ViewBag.Name || advertPost.Content.Contains(ViewBag.Name))
-                        {
-
-                            <p class="mb-4">
-                                {
-                            <span class="badge bg-secondary me-1"> @tag.Name</span>
-
-
-                        }
-                            </p>
-
-
-                    foreach (var searchTag in advertPost.Tags)
-                    {
-                        
-                        {
-
-                    <div class="mb-5 p-5 bg-light box-shadow">
-
-                        <img src="@advertPost.FeaturedImageUrl" alt="@advertPost.Heading" class="mb-2 d-block img-fluid" />
-                        <h2 class="mb-4"> @advertPost.Heading </h2>
-                        <p class="mb-4">
-                            @advertPost.Author <br />
-
-                            Published Date: @advertPost.PublishedDate.ToShortDateString()
-                        </p>
-
-                        
-
-                        <p class="mb-4"> @advertPost.ShortDescription </p>
-                        <a class="btn btn-dark"
-                   asp-area=""
-                   asp-controller="Adverts"
-                   asp-action="Index"
-                   asp-route-urlHandle="@advertPost.UrlHandle"> Read More </a>
-
-                            </div>
-                        }
-
+            @*                <div> Tag not existing, Redirect in 3 sec.... </div>
+                            <script>
                                 
-                    }
-                    
-              }
+                                function redirectToActionWithTimeout() {
+                                    setTimeout(function () {
+                                        var url = '@Url.Action("Index", "Home")';
+                                        window.location.href = url;
+                                    }, 3000); // Redirect after a 3-second delay
+                                }
 
-            }
-               </div>
-    </div>
-</div>
+                                redirectToActionWithTimeout();
+    
+            </script>
+
 *@
-            
-
-
      
 

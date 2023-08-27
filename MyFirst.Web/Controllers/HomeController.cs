@@ -4,6 +4,7 @@ using MyFirst.Web.Models;
 using MyFirst.Web.Models.ViewModels;
 using MyFirst.Web.Repositories;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 
 namespace MyFirst.Web.Controllers
@@ -39,7 +40,7 @@ namespace MyFirst.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(string search, string link)
+        public async Task<IActionResult> Search(string search)
         {
             //getting all adverts
             var advertPosts = await advertPostRepository.GetAllAsync();
@@ -53,47 +54,10 @@ namespace MyFirst.Web.Controllers
                 Tags = tags
             };
 
-            //var searchResults = advertPosts.Where(advertPosts => advertPosts.Tags.ToString().Contains(search)).ToList();
+            ViewBag.Name = search;
 
-            //if (searchResults != null)
-            //{
-
-
-            //Console.Write("I found the value");
-
-            //}
-
-            //foreach (var advertPost in advertPosts)
-
-            //{
-            //    var separateTag = advertPost.Tags.Equals(search); 
-
-            //    if (separateTag == true) 
-            //    {
-
-            //        var searchModel = new SearchViewModel
-            //        {
-            //            SearchAdvertPosts = advertPosts,
-            //            SearchTags = tags,
-            //        };
-
-
-            //        return View(searchModel);
-
-            //    }
-            //    else
-            //    {
-            //        return View(AboutUs);
-            //    }
-
-
-            //}
-
-
-            //ViewBag.Link = link;
-            ViewBag.Link = link;
-                ViewBag.Name = search;
-
+            
+          
             return View(model);
         }
 

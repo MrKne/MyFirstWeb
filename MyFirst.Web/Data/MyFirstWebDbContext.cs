@@ -7,7 +7,9 @@ namespace MyFirst.Web.Data
     public class MyFirstWebDbContext : DbContext
     {
         public MyFirstWebDbContext(DbContextOptions<MyFirstWebDbContext> options) : base(options)
+
         {
+
         }
 
 
