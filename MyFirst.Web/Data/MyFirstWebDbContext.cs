@@ -9,7 +9,7 @@ namespace MyFirst.Web.Data
         public MyFirstWebDbContext(DbContextOptions<MyFirstWebDbContext> options) : base(options)
 
         {
-
+            //    this.Database.SetCommandTimeout(TimeSpan.FromSeconds(30));
         }
 
 
